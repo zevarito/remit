@@ -4,18 +4,16 @@ module Remit
   module Reserve
     class Request < Remit::Request
       action :Reserve
-      parameter :recipient_token_id, :required => true
-      parameter :sender_token_id, :required => true
-      parameter :sender_reference
-      parameter :recipient_reference
+
       parameter :caller_reference, :required => true
-      parameter :transaction_date
+      parameter :sender_token_id, :required => true
       parameter :transaction_amount, :type => Remit::RequestTypes::Amount, :required => true
-      parameter :charge_fee_to, :required => true
-      parameter :sender_description
+
       parameter :caller_description
-      parameter :marketplace_fixed_fee, :type => Remit::RequestTypes::Amount
-      parameter :marketplace_variable_fee
+      parameter :descriptor_policy
+      parameter :override_ipn_url
+      parameter :sender_description
+      parameter :transaction_timeout_in_mins
     end
 
     class Response < Remit::Response

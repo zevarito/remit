@@ -90,7 +90,7 @@ module Remit
     API_SANDBOX_ENDPOINT = 'https://fps.sandbox.amazonaws.com/'.freeze
     PIPELINE_URL = 'https://authorize.payments.amazon.com/cobranded-ui/actions/start'.freeze
     PIPELINE_SANDBOX_URL = 'https://authorize.payments-sandbox.amazon.com/cobranded-ui/actions/start'.freeze
-    API_VERSION = Date.new(2008, 9, 17).to_s.freeze
+    API_VERSION = Date.new(2010, 8, 28).to_s.freeze
     PIPELINE_VERSION = Date.new(2009, 1, 9).to_s.freeze
     SIGNATURE_VERSION = 2.freeze
     SIGNATURE_METHOD = "HmacSHA256".freeze
@@ -107,13 +107,6 @@ module Remit
       @pipeline_url = sandbox ? PIPELINE_SANDBOX_URL : PIPELINE_URL
       @api_endpoint = sandbox ? API_SANDBOX_ENDPOINT : API_ENDPOINT
       super(@api_endpoint)
-    end
-    
-    # generates v1 signatures, for historical purposes.
-    def self.signature_v1(path, params, secret_key)
-      params = params.reject {|key, val| ['awsSignature', 'action', 'controller', 'id'].include?(key) }.sort_by{ |k,v| k.to_s.downcase }.map{|k,v| "#{CGI::escape(k)}=#{Remit::SignedQuery.escape_value(v)}"}.join('&')
-      signable = path + '?' + params
-      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::SHA1.new, secret_key, signable)).strip
     end
 
     private

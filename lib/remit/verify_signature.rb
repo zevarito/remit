@@ -4,7 +4,6 @@ module Remit
       action :VerifySignature
       parameter :url_end_point, :required => true
       parameter :http_parameters, :required => true
-      parameter :version, :required => true
     end
 
     class Response < Remit::Response

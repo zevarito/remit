@@ -1,9 +1,7 @@
 module Remit
 
   class PipelineResponse < InboundRequest
-    # signature key name
-    SIGNATURE_KEY = 'awsSignature'
-    
+
     def successful?
       [
         Remit::PipelineStatusCode::SUCCESS_UNCHANGED,
@@ -11,10 +9,11 @@ module Remit
         Remit::PipelineStatusCode::SUCCESS_ACH,
         Remit::PipelineStatusCode::SUCCESS_CC,
         Remit::PipelineStatusCode::SUCCESS_RECIPIENT_TOKEN_INSTALLED
-      ].include?(@hash_params['status']) #:status])
-      # BJM: 'status' not :status
+      ].include?(@hash_params['status'])
+    end
 
+    def aborted?
+      @hash_params['status'] == Remit::PipelineStatusCode::ABORTED
     end
   end
-
 end

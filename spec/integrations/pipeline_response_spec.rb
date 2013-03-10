@@ -9,7 +9,7 @@ require File.dirname(__FILE__) + '/integrations_helper'
 #    params = { :status => "SA",
 #                    :tokenID => "foo",
 #                    :callerReference => "bar",
-#                    :awsSignature => "7QrCpQ1nMng3Usaj8LFkeo4zorM="}
+#                    :signature => "7QrCpQ1nMng3Usaj8LFkeo4zorM="}
 #    url = URI.parse("http://example.com/payment?#{params.to_url_params}")
 #    @pipeline_response = Remit::PipelineResponse.new(url.path, url.query, SECRET_KEY)
 #  end
